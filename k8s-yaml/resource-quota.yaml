@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-recursos
+spec:
+  hard:
+   pods: "5" # Limite de pods
+   requests.cpu: "2" # Limitar CPUs
+   requests.memory: 2Gi # Limitar memoria
+   limits.cpu: "4" # Limite maximo de CPUs
+   limits.memory: 4Gi # Limite maximo de memoria

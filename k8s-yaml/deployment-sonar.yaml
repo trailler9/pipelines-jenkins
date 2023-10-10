@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sonarqube-deployment
+  namespace: pruebas
 spec:
   replicas: 1
   selector:
