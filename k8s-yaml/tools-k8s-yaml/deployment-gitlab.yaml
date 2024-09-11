@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab-ce-deployment
+  namespace: pruebas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitlab-ce
+  template:
+    metadata:
+      labels:
+        app: gitlab-ce
+    spec:
+      containers:
+        - name: gitlab-ce
+          image: gitlab/gitlab-ce:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 2022
+            - containerPort: 8442
+          env:
+            - name: GITLAB_OMNIBUS_CONFIG
+              value: |
+                external_url 'http://172.20.60.191'
+                gitlab_rails['initial_root_password'] = 'trakatrikitok'
+          volumeMounts:
+            - name: config
+              mountPath: /etc/gitlab
+            - name: logs
+              mountPath: /var/log/gitlab
+            - name: data
+              mountPath: /var/opt/gitlab
+
+      volumes:
+        - name:  config
+          emptyDir: {}
+        - name:  logs
+          emptyDir: {}
+        - name:  data
+          emptyDir: {}

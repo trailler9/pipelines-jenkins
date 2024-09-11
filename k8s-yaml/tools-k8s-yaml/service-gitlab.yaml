@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-service
+  namespace: pruebas
+spec:
+  selector:
+    app: gitlab-ce
+  ports:
+    - name: principal
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: secundario
+      protocol: TCP
+      port: 2022
+      targetPort: 2022
+    - name: terciario
+      protocol: TCP
+      port: 8442
+      targetPort: 8442
+  type: LoadBalancer
